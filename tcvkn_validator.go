@@ -23,11 +23,15 @@ func NumberOfDecimalDigits(i int) int {
 }
 
 func IntegerToSlice(i int) []int {
-	a := make([]int, 10)
+	var a []int
 	for i != 0 {
 
 		a = append(a, i%10)
 		i /= 10
+	}
+
+	for i, j := 0, len(a)-1; i < j; i, j = i+1, j-1 {
+		a[i], a[j] = a[j], a[i]
 	}
 	return a
 }
