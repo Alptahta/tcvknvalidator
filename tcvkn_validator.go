@@ -1,13 +1,34 @@
 package tcvknvalidator
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func ValidateTCVKN(tcvkn int) bool {
 	if NumberOfDecimalDigits(tcvkn) != 10 {
 		return NumberOfDecimalDigits(tcvkn) == 10
 	}
 	fmt.Println(IntegerToSlice(tcvkn))
-	return true
+	s := IntegerToSlice(tcvkn)
+	result := 0
+	lastDigit := s[len(s)-1]
+
+	for i := 0; i < len(s)-i; i++ {
+		if (s[i]+9-i)%10 == 9 {
+			result += 9
+		} else {
+			result += ((s[i] + 9 - i) % 10) * int(math.Pow(2, float64(9-i))) % 9
+		}
+	}
+
+	var expectedLastDigit int = (10 - (result % 10)) % 10
+
+	if lastDigit == expectedLastDigit {
+		return true
+	} else {
+		return false
+	}
 }
 
 func NumberOfDecimalDigits(i int) int {
@@ -25,7 +46,6 @@ func NumberOfDecimalDigits(i int) int {
 func IntegerToSlice(i int) []int {
 	var a []int
 	for i != 0 {
-
 		a = append(a, i%10)
 		i /= 10
 	}
