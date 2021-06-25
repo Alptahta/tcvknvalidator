@@ -1,14 +1,12 @@
 package tcvknvalidator
 
-import "fmt"
-
 func ValidateTCVKN(tcvkn int) bool {
 
-	if NumberOfDecimalDigits(tcvkn) != 10 {
-		return NumberOfDecimalDigits(tcvkn) == 10
-	}
+	// if NumberOfDecimalDigits(tcvkn) != 10 {
+	// 	return NumberOfDecimalDigits(tcvkn) == 10
+	// }
 
-	fmt.Println(IntegerToSlice(tcvkn))
+	// fmt.Println(IntegerToSlice(tcvkn))
 	return true
 }
 
