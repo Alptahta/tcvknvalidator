@@ -6,23 +6,25 @@ import (
 )
 
 func ValidateTCVKN(tcvkn int) bool {
-	if NumberOfDecimalDigits(tcvkn) != 10 {
-		return NumberOfDecimalDigits(tcvkn) == 10
+	if numberOfDecimalDigits(tcvkn) != 10 {
+		return numberOfDecimalDigits(tcvkn) == 10
 	}
-	fmt.Println(IntegerToSlice(tcvkn))
-	s := IntegerToSlice(tcvkn)
+	fmt.Println(integerToSlice(tcvkn))
+	s := integerToSlice(tcvkn)
 	result := 0
 	lastDigit := s[len(s)-1]
+	fmt.Println(lastDigit)
 
-	for i := 0; i < len(s)-i; i++ {
+	for i := 0; i < len(s)-1; i++ {
 		if (s[i]+9-i)%10 == 9 {
 			result += 9
 		} else {
-			result += ((s[i] + 9 - i) % 10) * int(math.Pow(2, float64(9-i))) % 9
+			result += ((s[i] + 9 - i) % 10) * int(math.Pow(2, 9-float64(i))) % 9
 		}
 	}
 
 	var expectedLastDigit int = (10 - (result % 10)) % 10
+	fmt.Println(expectedLastDigit)
 
 	if lastDigit == expectedLastDigit {
 		return true
@@ -31,7 +33,7 @@ func ValidateTCVKN(tcvkn int) bool {
 	}
 }
 
-func NumberOfDecimalDigits(i int) int {
+func numberOfDecimalDigits(i int) int {
 	if i == 0 {
 		return 1
 	}
@@ -43,7 +45,7 @@ func NumberOfDecimalDigits(i int) int {
 	return count
 }
 
-func IntegerToSlice(i int) []int {
+func integerToSlice(i int) []int {
 	var a []int
 	for i != 0 {
 		a = append(a, i%10)
