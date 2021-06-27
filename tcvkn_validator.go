@@ -1,19 +1,17 @@
 package tcvknvalidator
 
 import (
-	"fmt"
 	"math"
 )
 
+// ValidateTCVKN Validates given number with algorithm then return boolean value.
 func ValidateTCVKN(tcvkn int) bool {
 	if numberOfDecimalDigits(tcvkn) != 10 {
 		return numberOfDecimalDigits(tcvkn) == 10
 	}
-	fmt.Println(integerToSlice(tcvkn))
 	s := integerToSlice(tcvkn)
 	result := 0
 	lastDigit := s[len(s)-1]
-	fmt.Println(lastDigit)
 
 	for i := 0; i < len(s)-1; i++ {
 		if (s[i]+9-i)%10 == 9 {
@@ -24,7 +22,6 @@ func ValidateTCVKN(tcvkn int) bool {
 	}
 
 	var expectedLastDigit int = (10 - (result % 10)) % 10
-	fmt.Println(expectedLastDigit)
 
 	if lastDigit == expectedLastDigit {
 		return true
