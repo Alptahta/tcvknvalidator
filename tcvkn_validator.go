@@ -22,13 +22,13 @@ func ValidateTCVKN(tcvkn int) bool {
 		}
 	}
 
-	var expectedLastDigit = (10 - (result % 10)) % 10
+	var expectedLastDigit int = (10 - (result % 10)) % 10
 
 	if lastDigit == expectedLastDigit {
-		return true
-	} else {
-		return false
+		return lastDigit == expectedLastDigit
 	}
+	return false
+
 }
 
 func numberOfDecimalDigits(i int) int {
