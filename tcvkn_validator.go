@@ -1,3 +1,4 @@
+//Package tcvknvalidator provides validity of Turkish Citizens' Tax Numbers
 package tcvknvalidator
 
 import (
@@ -21,7 +22,7 @@ func ValidateTCVKN(tcvkn int) bool {
 		}
 	}
 
-	var expectedLastDigit int = (10 - (result % 10)) % 10
+	var expectedLastDigit = (10 - (result % 10)) % 10
 
 	if lastDigit == expectedLastDigit {
 		return true
